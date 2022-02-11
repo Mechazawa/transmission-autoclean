@@ -10,7 +10,15 @@ def main(args=None):
     else:
         args = {**parse_arguments(), **args}
 
-    client = Client(**args)
+    client = Client(
+        protocol=args['protocol'],
+        username=args['username'],
+        password=args['password'],
+        host=args['host'],
+        port=args['port'],
+        path=args['path'],
+        timeout=args['timeout'],
+    )
 
     while True:
         print("Checking torrents...")
@@ -47,7 +55,7 @@ def parse_arguments():
                                   help='username for authentication', default=getenv("USERNAME"))
     connection_group.add_argument('-p', '--password', dest='password', metavar='PASS',
                                   help='password for authentication', default=getenv("PASSWORD"))
-    connection_group.add_argument('-H', '--host', dest='host', default=getenv("USERNAME", "127.0.0.1"),
+    connection_group.add_argument('-H', '--host', dest='host', default=getenv("HOST", "127.0.0.1"),
                                   help='transmission rpc host')
     connection_group.add_argument('-P', '--port', dest='port', default=int(getenv("PORT", 9091)),
                                   help='transmission rpc port')
@@ -56,16 +64,16 @@ def parse_arguments():
     connection_group.add_argument('-t', '--timeout', dest='timeout', default=int(getenv('timeout', 30)))
 
     parser.add_argument('--delete', help='delete removed torrent files', action='store_true')
-    parser.add_argument('-i', '--interval', type=int, default=int(getenv('INTERVAL')),
+    parser.add_argument('-i', '--interval', type=int, default=int(getenv('INTERVAL', 0)) or None,
                         help='interval between runs in minutes, only runs once if not set')
     parser.add_argument('--debug', help='enable debug logging', action='store_true')
 
     args = vars(parser.parse_args())
 
     # apply flags
-    if getenv('SECURE').lower().strip() == 'true':
+    if getenv('SECURE', '').lower().strip() == 'true':
         args['protocol'] = 'https'
-    if getenv('DELETE').lower().strip() == 'true':
+    if getenv('DELETE', '').lower().strip() == 'true':
         args['delete'] = True
 
     return args
