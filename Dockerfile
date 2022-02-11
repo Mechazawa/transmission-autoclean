@@ -11,9 +11,9 @@ ENV DELETE false
 ENV INTERVAL 30
 ENV DEBUG false
 
-COPY . /app
-WORKDIR /app
-
+COPY requirements.txt ./
 RUN pip install -r requirements.txt --no-cache-dir
 
-ENTRYPOINT python3 main.py
+COPY . ./
+
+CMD [ "python", "./main.py" ]
