@@ -1,0 +1,1 @@
+transmission-rpc==3.3.0
