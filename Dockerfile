@@ -20,4 +20,4 @@ WORKDIR /app
 
 RUN pip3 install --requirements requirements.txt
 
-ENTRYPOINY ['python3', 'main.py']
+ENTRYPOINT ['python3', 'main.py']
