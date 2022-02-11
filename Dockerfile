@@ -16,4 +16,4 @@ WORKDIR /app
 
 RUN pip install -r requirements.txt --no-cache-dir
 
-ENTRYPOINT ['python3', 'main.py']
+ENTRYPOINT python3 main.py
