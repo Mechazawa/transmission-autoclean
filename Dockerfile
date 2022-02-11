@@ -11,13 +11,9 @@ ENV DELETE false
 ENV INTERVAL 30
 ENV DEBUG false
 
-RUN mkdir /app
-
-COPY main.py /app/
-COPY requirements.txt /app/
-
+COPY . /app
 WORKDIR /app
 
-RUN pip3 install --requirements requirements.txt
+RUN pip install --requirements requirements.txt --no-cache-dir
 
 ENTRYPOINT ['python3', 'main.py']
