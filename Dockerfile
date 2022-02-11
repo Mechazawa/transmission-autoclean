@@ -5,7 +5,7 @@ ENV USERNAME ""
 ENV PASSWORD ""
 ENV HOST "127.0.0.1"
 ENV PORT "9091"
-ENV PATH "/transmission/"
+ENV URL_PATH "/transmission/"
 ENV TIMEOUT 30
 ENV DELETE false
 ENV INTERVAL 30
@@ -14,6 +14,6 @@ ENV DEBUG false
 COPY . /app
 WORKDIR /app
 
-RUN pip install --requirements requirements.txt --no-cache-dir
+RUN pip install -r requirements.txt --no-cache-dir
 
 ENTRYPOINT ['python3', 'main.py']

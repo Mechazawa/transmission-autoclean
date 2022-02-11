@@ -51,7 +51,7 @@ def parse_arguments():
                                   help='transmission rpc host')
     connection_group.add_argument('-P', '--port', dest='port', default=int(getenv("PORT", 9091)),
                                   help='transmission rpc port')
-    connection_group.add_argument('--path', dest='path', default=getenv('PATH', '/transmission/'),
+    connection_group.add_argument('--path', dest='path', default=getenv('URL_PATH', '/transmission/'),
                                   help='transmission rpc path')
     connection_group.add_argument('-t', '--timeout', dest='timeout', default=int(getenv('timeout', 30)))
 
